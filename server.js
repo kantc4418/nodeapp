@@ -27,7 +27,19 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.get('/getQuestions', function (req, res) {
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+  
+    if (token == null) return res.sendStatus(401);
+  
+    jwt.verify(token, "chandra4418");
+  
+    next();
+    
+  }
+
+app.get('/getQuestions', authenticateToken, function (req, res) {
     con.query('SELECT * FROM questions', (err, result, fields) => {
         if (err) {
             throw err;
@@ -60,7 +72,7 @@ app.post('/loginUser', function (req, res) {
     con.query('SELECT * FROM signup WHERE email = ? AND password = ?', [formemail, formpassword], function(error, results, fields) {
     if (results.length > 0) {
                 // res.status(200).json({status: 'success'});
-                var token = jwt.sign({ id: results.id }, "chandra4418", {
+                var token = jwt.sign({ id: results }, "chandra4418", {
                 expiresIn: 86400 // expires in 24 hours
                 });
                 res.status(200).send({ status: 'success', auth: true, token: token });
