@@ -32,9 +32,9 @@ var mysql = require('mysql');
 
 var con = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "",
-    database: "emp_management"
+    user: "chandra4418",
+    password: "Krish@4418",
+    database: "student_quiz"
 })
 
 con.connect();
