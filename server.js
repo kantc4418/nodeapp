@@ -31,11 +31,18 @@ var PORT = process.env.PORT || 3000;
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-    host: "sql5.freesqldatabase.com",
-    user: "sql5409581",
-    password: "dqPXfXzXuZ",
-    database: "sql5409581"
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "emp_management"
 })
+
+// var con = mysql.createConnection({
+//   host: "sql6.freesqldatabase.com",
+//   user: "sql6427304",
+//   password: "tijIlwK45d",
+//   database: "sql6427304"
+// })
 
 con.connect();
 
